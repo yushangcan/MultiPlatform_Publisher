@@ -113,16 +113,27 @@ PR 描述需要包含：
 
 ## 运行方式
 
-当前 PR 仅包含项目规划文档，后续 PR 会补充后端和前端启动命令。
-
-预计后端运行方式：
+后端运行方式：
 
 ```bash
 cd backend
+go mod tidy
 go run ./cmd/server
 ```
 
-预计前端运行方式：
+健康检查：
+
+```bash
+curl http://localhost:8080/api/health
+```
+
+预期返回：
+
+```json
+{"status":"ok"}
+```
+
+前端运行方式会在后续 PR 补充：
 
 ```bash
 cd frontend

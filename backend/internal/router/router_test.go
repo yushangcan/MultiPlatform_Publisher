@@ -93,7 +93,7 @@ func TestNewRegistersRewriteRoute(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
 	engine := router.New()
-	body := []byte(`{"content":{"topic":"大学生暑假提升自己","core_points":["学习 Go","完成项目 demo"]},"platforms":["wechat","zhihu"]}`)
+	body := []byte(`{"content":{"topic":"大学生暑假提升自己","core_points":["学习 Go","完成项目 demo"]},"platforms":["wechat","zhihu","bilibili","xiaohongshu"]}`)
 	request := httptest.NewRequest(http.MethodPost, "/api/rewrite", bytes.NewReader(body))
 	request.Header.Set("Content-Type", "application/json")
 	response := httptest.NewRecorder()
@@ -102,5 +102,17 @@ func TestNewRegistersRewriteRoute(t *testing.T) {
 
 	if response.Code != http.StatusOK {
 		t.Fatalf("expected status %d, got %d: %s", http.StatusOK, response.Code, response.Body.String())
+	}
+
+	var payload struct {
+		Drafts []struct {
+			Platform string `json:"platform"`
+		} `json:"drafts"`
+	}
+	if err := json.Unmarshal(response.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if len(payload.Drafts) != 4 {
+		t.Fatalf("expected 4 drafts, got %d", len(payload.Drafts))
 	}
 }

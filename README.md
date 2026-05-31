@@ -152,7 +152,7 @@ curl http://localhost:8080/api/platforms
 ```bash
 curl -X POST http://localhost:8080/api/rewrite \
   -H "Content-Type: application/json" \
-  -d '{"content":{"topic":"大学生暑假提升自己","audience":"大学生","content_type":"经验分享","tone":"轻松、实用","core_points":["学习 Go","完成项目 demo","准备简历"],"keywords":["大学生","Go","项目","简历"],"suggested_title":"大学生暑假提升自己：一篇适合多平台发布的内容"},"platforms":["wechat","zhihu"]}'
+  -d '{"content":{"topic":"大学生暑假提升自己","audience":"大学生","content_type":"经验分享","tone":"轻松、实用","core_points":["学习 Go","完成项目 demo","准备简历"],"keywords":["大学生","Go","项目","简历"],"suggested_title":"大学生暑假提升自己：一篇适合多平台发布的内容"},"platforms":["wechat","zhihu","bilibili","xiaohongshu"]}'
 ```
 
 前端运行方式会在后续 PR 补充：

@@ -26,8 +26,8 @@ func defaultPlatformRegistry() *platform.Registry {
 	registry, err := platform.NewRegistry(
 		platform.NewWechatAdapter(),
 		platform.NewZhihuAdapter(),
-		platform.NewStaticAdapter(platform.Bilibili),
-		platform.NewStaticAdapter(platform.Xiaohongshu),
+		platform.NewBilibiliAdapter(),
+		platform.NewXiaohongshuAdapter(),
 	)
 	if err != nil {
 		panic(err)

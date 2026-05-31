@@ -133,6 +133,14 @@ curl http://localhost:8080/api/health
 {"status":"ok"}
 ```
 
+内容理解接口：
+
+```bash
+curl -X POST http://localhost:8080/api/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"input":"我想写一篇关于大学生暑假提升自己的内容，主要讲学习 Go、做项目和准备简历，语气希望轻松一点。"}'
+```
+
 前端运行方式会在后续 PR 补充：
 
 ```bash

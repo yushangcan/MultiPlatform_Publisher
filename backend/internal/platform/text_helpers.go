@@ -61,3 +61,18 @@ func numberedPoints(points []string) string {
 	}
 	return strings.Join(lines, "\n")
 }
+
+func bulletPoints(points []string, prefix string) string {
+	lines := make([]string, 0, len(points))
+	for _, point := range points {
+		point = strings.TrimSpace(point)
+		if point == "" {
+			continue
+		}
+		lines = append(lines, prefix+point)
+	}
+	if len(lines) == 0 {
+		return prefix + "先明确目标，再拆解行动步骤"
+	}
+	return strings.Join(lines, "\n")
+}

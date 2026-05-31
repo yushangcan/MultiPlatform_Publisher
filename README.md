@@ -167,6 +167,19 @@ npm run dev
 
 当前阶段尚未引入业务代码依赖。后续引入的 Go、前端和大模型相关依赖会在 README 中持续更新，并注明项目原创功能边界。
 
+## 环境变量
+
+后端默认不依赖外部大模型密钥，`LLM_PROVIDER=rule` 时会使用本地规则完成内容理解和改写。需要调整配置时，可以参考 [backend/.env.example](backend/.env.example)。
+
+| 变量 | 默认值 | 说明 |
+| --- | --- | --- |
+| `PORT` | `8080` | 后端服务监听端口 |
+| `LLM_PROVIDER` | `rule` | 大模型 Provider，当前默认使用本地规则 |
+| `LLM_API_KEY` | 空 | 外部大模型 API Key |
+| `LLM_MODEL` | `deepseek-chat` | 外部大模型名称 |
+| `LLM_BASE_URL` | `https://api.deepseek.com` | OpenAI 兼容接口地址 |
+| `LLM_TIMEOUT_SECONDS` | `30` | 外部模型请求超时时间 |
+
 ## 项目文档
 
 - [架构设计](docs/architecture.md)

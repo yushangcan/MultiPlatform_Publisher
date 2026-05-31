@@ -88,3 +88,19 @@ func TestNewRegistersPlatformListRoute(t *testing.T) {
 		t.Fatalf("expected 4 platforms, got %d", len(payload.Platforms))
 	}
 }
+
+func TestNewRegistersRewriteRoute(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+
+	engine := router.New()
+	body := []byte(`{"content":{"topic":"大学生暑假提升自己","core_points":["学习 Go","完成项目 demo"]},"platforms":["wechat","zhihu"]}`)
+	request := httptest.NewRequest(http.MethodPost, "/api/rewrite", bytes.NewReader(body))
+	request.Header.Set("Content-Type", "application/json")
+	response := httptest.NewRecorder()
+
+	engine.ServeHTTP(response, request)
+
+	if response.Code != http.StatusOK {
+		t.Fatalf("expected status %d, got %d: %s", http.StatusOK, response.Code, response.Body.String())
+	}
+}

@@ -60,3 +60,31 @@ func TestNewRegistersAnalyzeRoute(t *testing.T) {
 		t.Fatal("expected structured content with core information")
 	}
 }
+
+func TestNewRegistersPlatformListRoute(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+
+	engine := router.New()
+	request := httptest.NewRequest(http.MethodGet, "/api/platforms", nil)
+	response := httptest.NewRecorder()
+
+	engine.ServeHTTP(response, request)
+
+	if response.Code != http.StatusOK {
+		t.Fatalf("expected status %d, got %d: %s", http.StatusOK, response.Code, response.Body.String())
+	}
+
+	var payload struct {
+		Platforms []struct {
+			Platform    string `json:"platform"`
+			DisplayName string `json:"display_name"`
+		} `json:"platforms"`
+	}
+	if err := json.Unmarshal(response.Body.Bytes(), &payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if len(payload.Platforms) != 4 {
+		t.Fatalf("expected 4 platforms, got %d", len(payload.Platforms))
+	}
+}

@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/yushangcan/MultiPlatform_Publisher/backend/internal/analyzer"
 	"github.com/yushangcan/MultiPlatform_Publisher/backend/internal/health"
 )
 
@@ -11,6 +12,7 @@ func New() *gin.Engine {
 
 	api := engine.Group("/api")
 	health.RegisterRoutes(api)
+	analyzer.RegisterRoutes(api, analyzer.NewRuleAnalyzer())
 
 	return engine
 }
